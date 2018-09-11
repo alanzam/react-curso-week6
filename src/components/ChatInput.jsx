@@ -16,6 +16,7 @@ class ChatInput extends React.Component {
         message: val
       }
       console.log(chatMessage);
+      this.props.onSubmit(chatMessage);
       this.textInput.value = null;
     }
   }
