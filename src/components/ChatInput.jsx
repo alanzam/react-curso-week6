@@ -15,7 +15,7 @@ class ChatInput extends React.Component {
         userName: 'You',
         message: val
       }
-      this.props.onSubmit(chatMessage);
+      console.log(chatMessage);
       this.textInput.value = null;
     }
   }
@@ -25,7 +25,7 @@ class ChatInput extends React.Component {
       <div className="row">
         <form className="col s12" onSubmit={this.onSubmit}>
           <div className="input-field col s10">
-            <input type="text" ref={this.textInput} />
+            <input type="text" ref={(val) => this.textInput = val} />
           </div>
           <div className="input-field col s2">
             <button type="submit" className="waves-effect waves-light btn">Enviar</button>

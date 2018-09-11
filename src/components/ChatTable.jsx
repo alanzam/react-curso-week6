@@ -22,7 +22,7 @@ class ChatTable extends React.Component {
 								return (
 									<div key={index} className={classes}>
 										<div className="chip">
-											<strong>{msg.userName}: </strong>
+											<b>{msg.userName}: </b>
 											<span>{msg.message}</span>
 										</div>
 									</div>

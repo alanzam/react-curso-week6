@@ -32,5 +32,13 @@ class Notification extends React.Component {
   }
 }
 
+Notification.propTypes = {
+  isOpen : PropTypes.bool,
+  UserName : PropTypes.string.isRequired,
+  Message : PropTypes.string.isRequired,
+  closeNotification : PropTypes.func.isRequired,
+  replyNotification : PropTypes.func.isRequired
+}
+
 
 export default Notification;
