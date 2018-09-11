@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/hackerschoolmty/frontend-week5#readme",
   "dependencies": {
+    "fbemitter": "^2.1.1",
     "json5": "^2.0.1",
     "randomstring": "^1.1.5",
     "react": "^16.5.0",
