@@ -5,6 +5,20 @@ import SideChat from './components/SideChat';
 import Notification from './components/Notification';
 
 class App extends React.Component {
+	constructor(props) {
+    super(props);
+    this.state = {
+			
+		}
+  }
+
+	componentDidMount() {
+
+	}
+
+	componentDidUpdate() {
+
+	}
 
 	render() {
 		return (
