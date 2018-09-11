@@ -1,11 +1,13 @@
 import React from 'react';
 import ChatInput from './ChatInput';
 import PropTypes from 'prop-types';
+import ChatStore from '../stores/ChatStore';
 
 class ChatTable extends React.Component {
 	constructor(props) {
     super(props);
 		this.addMessage = this.addMessage.bind(this);
+		this.updateActiveChat = this.updateActiveChat.bind(this);
     this.state = {
 			messageList: [],
 			userName:  'Test1'
@@ -13,12 +15,16 @@ class ChatTable extends React.Component {
   }
 
 	componentDidMount() {
-
+			ChatStore.on("storeUpdated", this.updateActiveChat);
 	}
 
-	componentDidUpdate() {
-
+	componentWillUnmount() {
+			ChatStore.removeListener("storeUpdated", this.updateActiveChat);
 	}
+
+	updateActiveChat() {
+			this.setState({userName: ChatStore.getActiveChat(), messageList: []})
+	};
 
 	addMessage(message) {
 		this.setState((state, props) => {

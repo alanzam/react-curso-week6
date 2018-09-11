@@ -1,11 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { generateNewUser } from '../utils/chatHelper';
+import * as ChatActions from '../actions/ChatActions';
 
 class SideChat extends React.Component {
 	constructor(props) {
     super(props);
 		this.addUser = this.addUser.bind(this);
+		this.selectChat = this.selectChat.bind(this);
     this.state = { userList : [] };
   }
 
@@ -17,6 +19,10 @@ class SideChat extends React.Component {
 					return state;
 				});
 			});
+	}
+
+	selectChat(username) {
+		ChatActions.selectChat(username);
 	}
 
 	render() {
@@ -33,6 +39,7 @@ class SideChat extends React.Component {
                   <a
                     key={index}
                     className="collection-item"
+										onClick={() => this.selectChat(user)}
                   >
 										{user}
                   </a>
