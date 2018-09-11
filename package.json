@@ -1,0 +1,43 @@
+{
+  "name": "react-curso-basico",
+  "version": "0.0.2",
+  "description": "React - Flux",
+  "main": "''",
+  "scripts": {
+    "dev": "node server/devServer.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hackerschoolmty/frontend-week5.git"
+  },
+  "author": "Alan Zambrano",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hackerschoolmty/frontend-week5/issues"
+  },
+  "homepage": "https://github.com/hackerschoolmty/frontend-week5#readme",
+  "dependencies": {
+    "json5": "^2.0.1",
+    "randomstring": "^1.1.5",
+    "react": "^16.5.0",
+    "react-dom": "^16.5.0",
+    "webpack-hot-middleware": "^2.23.1"
+  },
+  "devDependencies": {
+    "babel": "^6.3.26",
+    "babel-core": "^6.10.4",
+    "babel-jest": "^13.0.0",
+    "babel-loader": "^6.2.4",
+    "babel-plugin-transform-object-assign": "^6.8.0",
+    "babel-plugin-transform-remove-console": "^6.8.0",
+    "babel-polyfill": "^6.9.1",
+    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-react": "^6.3.13",
+    "babel-preset-react-hmre": "^1.1.1",
+    "eventsource-polyfill": "^0.9.6",
+    "express": "^4.14.0",
+    "webpack": "^1.12.15",
+    "webpack-dev-middleware": "^1.6.1",
+    "webpack-hot-middleware": "^2.10.0"
+  }
+}
