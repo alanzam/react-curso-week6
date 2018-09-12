@@ -1,13 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { addChat } from '../actions/ChatActions';
 
 class ChatInput extends React.Component {
   constructor(props) {
     super(props);
     this.onSubmit = this.onSubmit.bind(this);
-    this.state = {
-      sending: false
-    }
   }
 
   onSubmit(e) {
@@ -19,7 +17,7 @@ class ChatInput extends React.Component {
         message: val
       }
       console.log(chatMessage);
-      this.props.onSubmit(chatMessage);
+      addChat(chatMessage);
       this.textInput.value = null;
     }
   }

@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { generateNewUser, generateResponse  } from '../utils/chatHelper';
+import { addChat, addUser } from '../actions/ChatActions';
 
 class NavBar extends React.Component {
 	constructor(props) {
@@ -11,13 +12,13 @@ class NavBar extends React.Component {
 
 	addUser() {
 		generateNewUser().then((u) => {
-			this.props.addUser(u);
+			addUser(u);
 		})
 	}
 
 	createResponse() {
 		generateResponse(this.props.userName).then((m) => {
-			this.props.addChat(m);
+			addChat(m);
 		})
 	}
 
