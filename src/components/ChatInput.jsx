@@ -5,6 +5,9 @@ class ChatInput extends React.Component {
   constructor(props) {
     super(props);
     this.onSubmit = this.onSubmit.bind(this);
+    this.state = {
+      sending: false
+    }
   }
 
   onSubmit(e) {
@@ -16,6 +19,7 @@ class ChatInput extends React.Component {
         message: val
       }
       console.log(chatMessage);
+      this.props.onSubmit(chatMessage);
       this.textInput.value = null;
     }
   }

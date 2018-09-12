@@ -2,11 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 class SideChat extends React.Component {
-	constructor(props) {
-    super(props);
-    this.userList = [ 'Test1' ];
-  }
-
 	render() {
 		return (
       <div className="col s12 m4 l3">
@@ -16,11 +11,12 @@ class SideChat extends React.Component {
           </div>
           <div className="collection">
             {
-              this.userList.map((user, index) => {
+              this.props.userList.map((user, index) => {
                 return (
                   <a
                     key={index}
                     className="collection-item"
+										onClick={() => this.props.selectChat(user)}
                   >
 										{user}
                   </a>

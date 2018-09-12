@@ -3,21 +3,22 @@ import ChatInput from './ChatInput';
 import PropTypes from 'prop-types';
 
 class ChatTable extends React.Component {
-	constructor(props) {
-    super(props);
-		this.userName = 'Test1';
-    this.messageList = [ { userName: 'Test1', message: 'Hello World' }  ];
-  }
+
 	render() {
+		const {
+			userName,
+			messageList,
+			addChat
+		} = this.props;
 		return (
       <div className="col s12 m8 l9">
         <div className="card hoverable indigo darken-4">
           <div className="card-content white-text left-align">
-            <span className="card-title">{`${this.userName}'s Chat`}</span>
+            <span className="card-title">{`${userName}'s Chat`}</span>
           </div>
           <div className="card">
             {
-              this.messageList.map((msg, index) => {
+              messageList.map((msg, index) => {
 								const classes = `card-content ${msg.userName === 'You' ? 'right-align' : 'left-align'}`;
 								return (
 									<div key={index} className={classes}>
@@ -31,7 +32,7 @@ class ChatTable extends React.Component {
             }
             <div className="card-action">
               <ChatInput
-								onSubmit={this.props.sendChat}
+								onSubmit={addChat}
 							/>
             </div>
           </div>
