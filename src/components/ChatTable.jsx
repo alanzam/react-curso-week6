@@ -1,36 +1,13 @@
 import React from 'react';
 import ChatInput from './ChatInput';
 import PropTypes from 'prop-types';
-import ChatStore from '../stores/ChatStore';
 
 class ChatTable extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			userName: ChatStore.getActiveChat(),
-			messageList: ChatStore.getCurrentMessageList()
-		}
-	}
-
-	componentDidMount() {
-		ChatStore.on("storeUpdated", () => {
-			this.setState(
-			{
-				userName: ChatStore.getActiveChat(),
-				messageList: ChatStore.getCurrentMessageList()
-			});
-		});
-	}
-
-	componentWillUnMount() {
-		ChatStore.remove('storeUpdated');
-	}
-
 	render() {
 		const {
 			userName,
 			messageList
-		} = this.state;
+		} = this.props;
 		return (
       <div className="col s12 m8 l9">
         <div className="card hoverable indigo darken-4">
@@ -53,6 +30,7 @@ class ChatTable extends React.Component {
             }
             <div className="card-action">
               <ChatInput
+								onSubmit={this.props.sendChat}
 							/>
             </div>
           </div>
@@ -60,6 +38,12 @@ class ChatTable extends React.Component {
       </div>
 		);
 	}
+}
+
+ChatTable.propTypes = {
+	userName: PropTypes.string.isRequired,
+	messageList: PropTypes.array.isRequired,
+	sendChat: PropTypes.func.isRequired
 }
 
 export default ChatTable;

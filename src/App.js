@@ -1,8 +1,8 @@
 import React from 'react';
-import NavBar from './components/NavBar';
-import ChatTable from './components/ChatTable';
+import NavBar from './containers/NavBar';
+import ChatTable from './containers/ChatTable';
 import SideChat from './components/SideChat';
-import Notification from './components/Notification';
+import Notification from './containers/Notification';
 
 class App extends React.Component {
 
@@ -10,13 +10,11 @@ class App extends React.Component {
 		console.log('rendering app');
 		return (
 			<div className="container">
-				<NavBar
-					/>
+				<Notification />
+				<NavBar />
 				<div className="row">
-					<ChatTable
-						/>
-		      <SideChat
-						/>
+					<ChatTable />
+		      <SideChat />
 		    </div>
 			</div>
 		);

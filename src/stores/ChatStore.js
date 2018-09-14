@@ -31,21 +31,38 @@ class ChatStore extends EventEmitter {
       this.activeChat =  'Test1';
     }
 
+		getUserNameFromList(userName) {
+			let found = false;
+			if (userName == "You") return true;
+			this.userList.forEach((usr) => {
+				if (userName == usr)
+					found = true;
+			});
+			console.log(found);
+			return found;
+		}
+
     handleActions(action) {
+			console.log(action);
       switch (action.type) {
         case 'ADD_CHAT': {
-          this.messageList[this.activeChat].push(action.payload);
+					if (!this.getUserNameFromList(action.payload.userName)) {
+						this.userList.push(action.payload.userName);
+						this.messageList[action.payload.userName] = [];
+					}
+          this.messageList[action.payload.userName == "You" ? this.activeChat : action.payload.userName].push(action.payload);
           this.emit("storeUpdated");
           break;
         }
         case 'ADD_USER': {
           this.userList.push(action.payload);
-          this.emit("userListUpdated");
+          this.emit("storeUpdated");
           break;
         }
         case 'SELECT_CHAT': {
           this.activeChat = action.payload;
-          this.messageList[this.activeChat] = [];
+					if (!this.messageList[this.activeChat])
+          	this.messageList[this.activeChat] = [];
           this.emit("storeUpdated");
           break;
         }

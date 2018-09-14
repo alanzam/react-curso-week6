@@ -12,7 +12,7 @@ class SideChat extends React.Component {
 	}
 
 	componentDidMount() {
-		ChatStore.on("userListUpdated", () => {
+		ChatStore.on("storeUpdated", () => {
 			this.setState(
 			{
 				userList: ChatStore.getUserList()
@@ -21,7 +21,7 @@ class SideChat extends React.Component {
 	}
 
 	componentWillUnMount() {
-		ChatStore.remove('userListUpdated');
+		ChatStore.remove('storeUpdated');
 	}
 
 	render() {

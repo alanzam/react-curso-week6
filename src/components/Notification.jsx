@@ -5,10 +5,9 @@ class Notification extends React.Component {
   render() {
     const {
       isOpen,
-      UserName,
-      Message,
-      closeNotification,
-      replyNotification
+      message,
+      userName,
+      closeNotification
     } = this.props;
     const styles = {
       display: isOpen ? 'block' : 'none'
@@ -18,12 +17,11 @@ class Notification extends React.Component {
         <div className="col s12 m6">
           <div className="card blue-grey darken-1">
             <div className="card-content white-text">
-              <span className="card-title">{UserName}</span>
-              <p>{Message}</p>
+              <span className="card-title">{userName}</span>
+              <p>{message}</p>
             </div>
             <div className="card-action">
               <a onClick={closeNotification}>Close Notification</a>
-              <a onClick={replyNotification.bind(this, UserName)}>Reply Notification</a>
             </div>
           </div>
         </div>
@@ -34,11 +32,9 @@ class Notification extends React.Component {
 
 Notification.propTypes = {
   isOpen : PropTypes.bool,
-  UserName : PropTypes.string.isRequired,
-  Message : PropTypes.string.isRequired,
-  closeNotification : PropTypes.func.isRequired,
-  replyNotification : PropTypes.func.isRequired
+  message : PropTypes.string,
+  userName: PropTypes.string,
+  closeNotification : PropTypes.func.isRequired
 }
-
 
 export default Notification;
