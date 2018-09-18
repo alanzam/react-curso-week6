@@ -1,13 +1,12 @@
 import React from 'react';
 import NavBar from './containers/NavBar';
 import ChatTable from './containers/ChatTable';
-import SideChat from './components/SideChat';
+import SideChat from './containers/SideChat';
 import Notification from './containers/Notification';
 
 class App extends React.Component {
 
 	render() {
-		console.log('rendering app');
 		return (
 			<div className="container">
 				<Notification />
