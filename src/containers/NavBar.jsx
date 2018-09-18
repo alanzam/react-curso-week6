@@ -1,6 +1,6 @@
 import React from 'react';
 import ChatStore from '../stores/ChatStore';
-import { generateChat, addExternalUser } from '../actions/ChatActions';
+import { ChatActions } from '../actions/ChatActions';
 import NavBarComponent from '../components/NavBar';
 
 class NavBar extends React.Component {
@@ -27,8 +27,8 @@ class NavBar extends React.Component {
 	render() {
 		return (
       <NavBarComponent
-				addUser={addExternalUser}
-        createResponse={generateChat}
+				addUser={ChatActions.addExternalUser}
+        createResponse={ChatActions.generateChat}
 			/>
 		);
 	}

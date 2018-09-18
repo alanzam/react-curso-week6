@@ -1,41 +1,53 @@
 import dispatcher from '../dispatcher';
 import { generateResponse, generateNewUser, generateNewChat } from '../utils/chatHelper';
 
-export function selectChat(username) {
+export const CHAT_CONSTANTS = {
+  ADD_USER : 'ADD_USER',
+  ADD_CHAT : 'ADD_CHAT',
+  SELECT_CHAT : 'SELECT_CHAT'
+};
+
+export const ChatActions = {
+  selectChat: (username) => {
     dispatcher.dispatch({
-        type: 'SELECT_CHAT',
+        type: CHAT_CONSTANTS.SELECT_CHAT,
         payload: username
     });
-}
-
-export function addChat(message) {
+  },
+  addChat: (message) => {
     dispatcher.dispatch({
-        type: 'ADD_CHAT',
+        type: CHAT_CONSTANTS.ADD_CHAT,
         payload: message
     });
-}
-
-export function addUser(username) {
+  },
+  addUser: (username) => {
     dispatcher.dispatch({
-        type: 'ADD_USER',
+        type: CHAT_CONSTANTS.ADD_USER,
         payload: username
     });
-}
-
-export function externalMessage(user) {
-  generateResponse(user).then((m) => {
-    addChat(m);
-  });
-}
-
-export function addExternalUser() {
-  generateNewUser().then((u) => {
-    addUser(u);
-  });
-}
-
-export function generateChat() {
-  generateNewChat().then((m) => {
-    addChat(m);
-  });
+  },
+  externalMessage: (user) => {
+    generateResponse(user).then((m) => {
+      dispatcher.dispatch({
+          type: CHAT_CONSTANTS.ADD_CHAT,
+          payload: m
+      });
+    });
+  },
+  addExternalUser: () => {
+    generateNewUser().then((u) => {
+      dispatcher.dispatch({
+          type: CHAT_CONSTANTS.ADD_USER,
+          payload: u
+      });
+    });
+  },
+  generateChat: () => {
+    generateNewChat().then((m) => {
+      dispatcher.dispatch({
+          type: CHAT_CONSTANTS.ADD_CHAT,
+          payload: m
+      });
+    });
+  }
 }

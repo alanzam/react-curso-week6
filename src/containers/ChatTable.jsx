@@ -1,6 +1,5 @@
 import React from 'react';
 import ChatStore from '../stores/ChatStore';
-import * as Actions from '../actions/ChatActions';
 import ChatTableComponent from '../components/ChatTable';
 
 class ChatTable extends React.Component {

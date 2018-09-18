@@ -1,6 +1,6 @@
 import dispatcher from '../dispatcher';
 import { EventEmitter } from 'events';
-import * as Actions from '../actions/ChatActions';
+import { CHAT_CONSTANTS } from '../actions/ChatActions';
 import ChatStore from './ChatStore';
 
 class NotificationStore extends EventEmitter {
@@ -12,7 +12,7 @@ class NotificationStore extends EventEmitter {
 
     handleActions(action) {
       switch (action.type) {
-        case 'ADD_CHAT': {
+        case CHAT_CONSTANTS.ADD_CHAT: {
           if (action.payload.userName == "You") return;
           if (action.payload.userName == ChatStore.getActiveChat()) return;
           this.newMessage = action.payload;

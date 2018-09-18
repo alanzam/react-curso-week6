@@ -1,6 +1,6 @@
 import dispatcher from '../dispatcher';
 import { EventEmitter } from 'events';
-import * as Actions from '../actions/ChatActions';
+import { CHAT_CONSTANTS } from '../actions/ChatActions';
 import storage from 'key-storage';
 
 
@@ -45,7 +45,7 @@ class ChatStore extends EventEmitter {
     handleActions(action) {
 			console.log(action);
       switch (action.type) {
-        case 'ADD_CHAT': {
+        case CHAT_CONSTANTS.ADD_CHAT: {
 					if (!this.getUserNameFromList(action.payload.userName)) {
 						this.userList.push(action.payload.userName);
 						this.messageList[action.payload.userName] = [];
@@ -54,12 +54,12 @@ class ChatStore extends EventEmitter {
           this.emit("storeUpdated");
           break;
         }
-        case 'ADD_USER': {
+        case CHAT_CONSTANTS.ADD_USER: {
           this.userList.push(action.payload);
           this.emit("storeUpdated");
           break;
         }
-        case 'SELECT_CHAT': {
+        case CHAT_CONSTANTS.SELECT_CHAT: {
           this.activeChat = action.payload;
 					if (!this.messageList[this.activeChat])
           	this.messageList[this.activeChat] = [];

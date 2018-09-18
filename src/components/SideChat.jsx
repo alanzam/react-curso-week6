@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { selectChat } from '../actions/ChatActions';
+import { ChatActions } from '../actions/ChatActions';
 import ChatStore from '../stores/ChatStore';
 
 class SideChat extends React.Component {
@@ -39,7 +39,7 @@ class SideChat extends React.Component {
                   <a
                     key={index}
                     className="collection-item"
-										onClick={() => selectChat(user)}
+										onClick={() => ChatActions.selectChat(user)}
                   >
 										{user}
                   </a>
