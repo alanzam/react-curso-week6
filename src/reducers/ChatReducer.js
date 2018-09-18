@@ -11,33 +11,40 @@ function getUserNameFromList(userName, userList) {
   return found;
 }
 
+function getNewMessageList(oldMessageList, message, currentChat) {
+  const activeChat = message.userName == "You" ? currentChat : message.userName;
+  let newMessageList = {}
+  newMessageList[activeChat] = oldMessageList[activeChat] ? [ ...oldMessageList[activeChat], message ] : [ message ];
+  return Object.assign({}, oldMessageList, newMessageList);
+}
+
+function generateNewChat(oldMessageList, newChat) {
+  let newMessageList = {}
+  newMessageList[newChat] = oldMessageList[newChat] ? [ ...oldMessageList[newChat] ] : [];
+  return Object.assign({}, oldMessageList, newMessageList);
+}
+
+function getNewUserList(oldList, user) {
+  let userList = [ ...oldList ];
+  if (!getUserNameFromList(user, oldList))
+    userList.push(user);
+  return userList;
+}
+
 export default (state = initState, action) => {
   switch (action.type) {
     case CHAT_CONSTANTS.ADD_CHAT: {
-      let newState = state;
-      if (!getUserNameFromList(action.payload.userName, newState.userList)) {
-        let newMessageList = Object.assign({}, ...newState.messageList);
-        newMessageList[action.payload.userName] = [];
-        newState = Object.assign({}, newState,
-                    { userList: [ ...newState.userList, action.payload.userName] },
-                    { messageList: Object.assign({}, ...newMessageList)  }
-                   );
-      }
-      let messageList = {};
-      let activeChat = action.payload.userName == "You" ? state.activeChat : action.payload.userName;
-      messageList[activeChat] = [ ...newState.messageList[activeChat], action.payload ];
-      newState = Object.assign({}, newState, { messageList: Object.assign({}, newState.messageList , messageList) } );
-      return newState;
+      return Object.assign({}, state
+        , { messageList: getNewMessageList(state.messageList, action.payload, state.activeChat) }
+        , { userList: getNewUserList(state.userList, action.payload.userName) });
     }
     case CHAT_CONSTANTS.ADD_USER: {
-      return Object.assign({}, state, { userList: [ ...state.userList, action.payload] });
+      return Object.assign({}, state, { userList: getNewUserList(state.userList, action.payload) });
     }
     case CHAT_CONSTANTS.SELECT_USER: {
-      let newState = state;
-      let messageList = {};
-      messageList[action.payload] = newState.messageList[action.payload] ? [ ...newState.messageList[action.payload] ] : [];
-      newState = Object.assign({}, newState, { messageList: Object.assign({}, newState.messageList, messageList) }, { activeChat : action.payload } );
-      return newState;
+      return Object.assign({}, state
+        , { messageList: generateNewChat(state.messageList, action.payload) }
+        , { activeChat : action.payload } );
     }
     default:
       return state
