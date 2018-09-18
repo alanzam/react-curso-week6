@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { ChatActions } from '../actions/ChatActions';
 
 class ChatInput extends React.Component {
   constructor(props) {
@@ -16,8 +15,7 @@ class ChatInput extends React.Component {
         userName: 'You',
         message: val
       }
-      console.log(chatMessage);
-      ChatActions.addChat(chatMessage);
+      this.props.onSubmit(chatMessage);
       this.textInput.value = null;
     }
   }

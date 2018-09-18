@@ -1,43 +1,21 @@
 import React from 'react';
-import ChatStore from '../stores/ChatStore';
 import ChatTableComponent from '../components/ChatTable';
+import { ChatActions } from '../actions/ChatActions';
+import { connect } from 'react-redux';
 
-class ChatTable extends React.Component {
-	constructor(props) {
-		super(props);
-		this.sendChat = this.sendChat.bind(this);
-		this.state = {
-			userName: ChatStore.getActiveChat(),
-			messageList: ChatStore.getCurrentMessageList()
-		}
-	}
-
-	componentDidMount() {
-		ChatStore.on("storeUpdated", () => {
-			this.setState(
-			{
-				userName: ChatStore.getActiveChat(),
-				messageList: ChatStore.getCurrentMessageList()
-			});
-		});
-	}
-
-	componentWillUnMount() {
-		ChatStore.remove('storeUpdated');
-	}
-
-	sendChat(message) {
-		addChat(message);
-	}
-
-	render() {
-		return (
-      <ChatTableComponent
-				sendChat={this.sendChat}
-				{...this.state}
-			/>
-		);
-	}
+const mapStateToProps = state => {
+  return {
+    messageList: state.messageList[state.activeChat],
+		userName: state.activeChat
+  }
 }
 
-export default ChatTable;
+const mapDispatchToProps = dispatch => {
+  return {
+    sendChat: message => {
+      dispatch(ChatActions.addChat(message))
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ChatTableComponent);
