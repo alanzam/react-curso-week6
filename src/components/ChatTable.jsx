@@ -8,6 +8,7 @@ class ChatTable extends React.Component {
 			userName,
 			messageList
 		} = this.props;
+		const user = userName;
 		return (
       <div className="col s12 m8 l9">
         <div className="card hoverable indigo darken-4">
@@ -30,7 +31,10 @@ class ChatTable extends React.Component {
             }
             <div className="card-action">
               <ChatInput
-								onSubmit={this.props.sendChat}
+								onSubmit={(msg) => {
+									console.log(user);
+									this.props.sendChat(msg, user);
+								}}
 							/>
             </div>
           </div>
