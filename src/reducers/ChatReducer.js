@@ -23,6 +23,7 @@ const MessageListReducer = (state = null, action ) => {
 
 const ActiveChatReducer = (state = null, action ) => {
   switch (action.type) {
+    case CHAT_CONSTANTS.REPLY_NOTIFICATION:
     case CHAT_CONSTANTS.SELECT_CHAT: {
       return action.payload;
     }
@@ -31,7 +32,23 @@ const ActiveChatReducer = (state = null, action ) => {
   }
 }
 
+const NotificationReducer = (state = { isOpen: false, userName: '', message: '' }, action ) => {
+  switch (action.type) {
+    case CHAT_CONSTANTS.ADD_CHAT: {
+      if (action.payload.userName == "You") return state;
+      return Object.assign({}, state, action.payload, { isOpen: true });
+    }
+    case CHAT_CONSTANTS.REPLY_NOTIFICATION:
+    case CHAT_CONSTANTS.CLOSE_NOTIFICATION: {
+      return Object.assign({}, state, { isOpen: false });
+    }
+    default:
+      return state;
+  }
+}
+
 export default combineReducers({
   messageList: MessageListReducer,
-  activeChat: ActiveChatReducer
+  activeChat: ActiveChatReducer,
+  notification: NotificationReducer
 });

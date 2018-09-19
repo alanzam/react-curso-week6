@@ -1,50 +1,17 @@
 import React from 'react';
-import NotificationStore from '../stores/NotificationStore';
+import { connect } from 'react-redux';
+import { ChatActionCreators } from '../actions/ChatActions';
 import NotificationComponent from '../components/Notification';
 
-class Notification extends React.Component {
-  constructor(props) {
-		super(props);
-    this.closeNotification = this.closeNotification.bind(this);
-		this.state = {
-      isOpen: false
-		}
-	}
+const mapStateToProps = (state) => ({
+	isOpen: state.notification.isOpen && state.notification.userName != state.activeChat,
+	userName: state.notification.userName,
+  message: state.notification.message
+});
 
-	componentDidMount() {
-		NotificationStore.on("storeUpdated", () => {
-			this.setState(
-			{
-				message: NotificationStore.getNewMessage(),
-        isOpen: NotificationStore.getNewMessage() != this.state.message
-			});
-		});
-	}
+const dispatchActionToProps = (dispatch) => ({
+	closeNotification: () => {dispatch(ChatActionCreators.closeNotification())},
+  replyNotification: (username) => {dispatch(ChatActionCreators.replyNotification(username))}
+});
 
-	componentWillUnMount() {
-		NotificationStore.remove('storeUpdated');
-	}
-
-  closeNotification() {
-    this.setState(
-    {
-      message: this.state.message,
-      isOpen: false
-    });
-  }
-
-	render() {
-    if (!this.state.message)
-      return null;
-		return (
-      <NotificationComponent
-        isOpen={this.state.isOpen}
-				userName={this.state.message.userName}
-        message={this.state.message.message}
-        closeNotification={this.closeNotification}
-			/>
-		);
-	}
-}
-
-export default Notification;
+export default connect(mapStateToProps, dispatchActionToProps)(NotificationComponent);

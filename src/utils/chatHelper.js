@@ -1,7 +1,7 @@
 import randomstring from 'randomstring';
 
 export function generateNewUser() {
-  const id = Math.floor(Math.random() * 100);
+  const id = Math.floor(Math.random() * 10);
   const generatedUserName = `User_${id}`;
   const p = new Promise(function(resolve, reject) {
    setTimeout(() => resolve(generatedUserName), 500);
@@ -10,7 +10,7 @@ export function generateNewUser() {
 }
 
 export function generateNewChat() {
-  const id = Math.floor(Math.random() * 100);
+  const id = Math.floor(Math.random() * 10);
   const generatedUserName = `User_${id}`;
   const message = randomstring.generate();
   const chatMessage = {

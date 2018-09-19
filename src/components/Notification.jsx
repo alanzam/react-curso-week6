@@ -7,7 +7,8 @@ class Notification extends React.Component {
       isOpen,
       message,
       userName,
-      closeNotification
+      closeNotification,
+      replyNotification
     } = this.props;
     const styles = {
       display: isOpen ? 'block' : 'none'
@@ -22,6 +23,7 @@ class Notification extends React.Component {
             </div>
             <div className="card-action">
               <a onClick={closeNotification}>Close Notification</a>
+              <a onClick={() => replyNotification(userName)}>Reply Notification</a>
             </div>
           </div>
         </div>

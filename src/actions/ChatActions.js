@@ -4,10 +4,19 @@ import { generateResponse, generateNewUser, generateNewChat } from '../utils/cha
 export const CHAT_CONSTANTS = {
   ADD_USER : 'ADD_USER',
   ADD_CHAT : 'ADD_CHAT',
-  SELECT_CHAT : 'SELECT_CHAT'
+  SELECT_CHAT : 'SELECT_CHAT',
+  CLOSE_NOTIFICATION: 'CLOSE_NOTIFICATION',
+  REPLY_NOTIFICATION: 'REPLY_NOTIFICATION',
 };
 
 export const ChatActionCreators = {
+  replyNotification: (username) => ({
+    type: CHAT_CONSTANTS.REPLY_NOTIFICATION,
+    payload: username
+  }),
+  closeNotification: () => ({
+    type: CHAT_CONSTANTS.CLOSE_NOTIFICATION
+  }),
   selectChat: (username) => ({
       type: CHAT_CONSTANTS.SELECT_CHAT,
       payload: username
