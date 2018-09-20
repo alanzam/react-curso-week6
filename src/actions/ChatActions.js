@@ -21,13 +21,11 @@ export const ChatActionCreators = {
       type: CHAT_CONSTANTS.SELECT_CHAT,
       payload: username
   }),
-  addChat: (message) => (dispatch, state) => {
-    dispatch({
-      type: CHAT_CONSTANTS.ADD_CHAT,
-      payload: message,
-      currentChat: state.activeChat
-    });
-  },
+  addChat: (message, currentChat) => ({
+    type: CHAT_CONSTANTS.ADD_CHAT,
+    payload: message,
+    currentChat
+  }),
   addUser: (username) => ({
       type: CHAT_CONSTANTS.ADD_USER,
       payload: username
@@ -37,7 +35,7 @@ export const ChatActionCreators = {
       dispatch({
           type: CHAT_CONSTANTS.ADD_CHAT,
           payload: m,
-          currentChat: state.activeChat
+          currentChat: user
       });
     });
   },

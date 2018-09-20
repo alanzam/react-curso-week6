@@ -15,6 +15,9 @@ app.use(require('webpack-hot-middleware')(compiler));
 app.get('*', function(req, res) {
   res.sendFile(path.join(__dirname, '../public/index.html'));
 });
+app.get('/*', function(req, res) {
+  res.sendFile(path.join(__dirname, '../public/index.html'));
+});
 
 app.listen('8080', function(err){
   if(err) {

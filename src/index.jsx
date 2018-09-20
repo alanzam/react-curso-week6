@@ -9,7 +9,7 @@ import error from './middlewares/error';
 import thunk from './middlewares/thunk';
 import localStorage from './middlewares/localStorage';
 import App from './App';
-console.log(initialState);
+
 const store = createStore(reducer, initialState, applyMiddleware(thunk, error, logger, localStorage));
 
 render(

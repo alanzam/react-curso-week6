@@ -32,7 +32,6 @@ class ChatTable extends React.Component {
             <div className="card-action">
               <ChatInput
 								onSubmit={(msg) => {
-									console.log(user);
 									this.props.sendChat(msg, user);
 								}}
 							/>

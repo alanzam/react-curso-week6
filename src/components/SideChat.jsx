@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from "react-router-dom";
 
 class SideChat extends React.Component {
 	render() {
@@ -13,13 +14,13 @@ class SideChat extends React.Component {
             {
               this.props.userList.map((user, index) => {
                 return (
-                  <a
+                  <Link
                     key={index}
                     className="collection-item"
-										onClick={() => this.props.selectChat(user)}
+										to={`/Chat/${user}`}
                   >
 										{user}
-                  </a>
+                  </Link>
                 )
               })
             }
