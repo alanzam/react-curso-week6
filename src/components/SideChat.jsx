@@ -1,29 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { selectChat } from '../actions/ChatActions';
-import ChatStore from '../stores/ChatStore';
-
 class SideChat extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			userList: ChatStore.getUserList()
-		};
-	}
-
-	componentDidMount() {
-		ChatStore.on("storeUpdated", () => {
-			this.setState(
-			{
-				userList: ChatStore.getUserList()
-			});
-		});
-	}
-
-	componentWillUnMount() {
-		ChatStore.remove('storeUpdated');
-	}
-
 	render() {
 		console.log('rendering sidchat');
 		return (
@@ -34,12 +11,12 @@ class SideChat extends React.Component {
           </div>
           <div className="collection">
             {
-              this.state.userList.map((user, index) => {
+              this.props.userList.map((user, index) => {
                 return (
                   <a
                     key={index}
                     className="collection-item"
-										onClick={() => selectChat(user)}
+										onClick={() => this.props.selectChat(user)}
                   >
 										{user}
                   </a>

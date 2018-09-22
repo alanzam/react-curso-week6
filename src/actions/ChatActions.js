@@ -1,41 +1,34 @@
-import dispatcher from '../dispatcher';
-import { generateResponse, generateNewUser, generateNewChat } from '../utils/chatHelper';
-
 export function selectChat(username) {
-    dispatcher.dispatch({
+    return {
         type: 'SELECT_CHAT',
         payload: username
-    });
+    };
 }
 
-export function addChat(message) {
-    dispatcher.dispatch({
+export function addChat(message, currentChat) {
+    return {
         type: 'ADD_CHAT',
-        payload: message
-    });
+        payload:  {
+          ...message,
+          currentChat
+        }
+    };
 }
 
 export function addUser(username) {
-    dispatcher.dispatch({
+    return {
         type: 'ADD_USER',
         payload: username
-    });
+    };
 }
 
-export function externalMessage(user) {
-  generateResponse(user).then((m) => {
-    addChat(m);
-  });
-}
-
-export function addExternalUser() {
-  generateNewUser().then((u) => {
-    addUser(u);
-  });
-}
-
-export function generateChat() {
-  generateNewChat().then((m) => {
-    addChat(m);
-  });
+export function generateChat() => (dispatch, getState) => {
+    var state = getState();
+    dispatch({
+      type: 'ADD_CHAT',
+      payload:  {
+        ...message,
+        currentChat
+      }
+    })
 }

@@ -2,12 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 class Notification extends React.Component {
+
   render() {
     const {
       isOpen,
       message,
-      userName,
-      closeNotification
+      userName
     } = this.props;
     const styles = {
       display: isOpen ? 'block' : 'none'
@@ -21,7 +21,7 @@ class Notification extends React.Component {
               <p>{message}</p>
             </div>
             <div className="card-action">
-              <a onClick={closeNotification}>Close Notification</a>
+              <a onClick={this.props.closeNotification}>Close Notification</a>
             </div>
           </div>
         </div>
@@ -31,10 +31,9 @@ class Notification extends React.Component {
 }
 
 Notification.propTypes = {
-  isOpen : PropTypes.bool,
   message : PropTypes.string,
   userName: PropTypes.string,
-  closeNotification : PropTypes.func.isRequired
+  isOpen: PropTypes.bool.isRequired
 }
 
 export default Notification;

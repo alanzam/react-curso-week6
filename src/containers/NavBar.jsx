@@ -1,37 +1,15 @@
 import React from 'react';
-import ChatStore from '../stores/ChatStore';
+import { connect } from 'react-redux';
 import { generateChat, addExternalUser } from '../actions/ChatActions';
 import NavBarComponent from '../components/NavBar';
+const mapStateToProps = state => ({
+	messageList: state.messageList,
+	userName: state.activeChat
+});
 
-class NavBar extends React.Component {
-  constructor(props) {
-		super(props);
-		this.state = {
-			userName: ChatStore.getActiveChat(),
-		}
-	}
+const mapDispatchToProps = dispatch => ({
+	createResponse: () => dispatch(generateChat()),
+  addUser: () => dispatch(addExternalUser())
+});
 
-	componentDidMount() {
-		ChatStore.on("storeUpdated", () => {
-			this.setState(
-			{
-				userName: ChatStore.getActiveChat()
-			});
-		});
-	}
-
-	componentWillUnMount() {
-		ChatStore.remove('storeUpdated');
-	}
-
-	render() {
-		return (
-      <NavBarComponent
-				addUser={addExternalUser}
-        createResponse={generateChat}
-			/>
-		);
-	}
-}
-
-export default NavBar;
+export default connect(mapStateToProps,mapDispatchToProps)(NavBarComponent)
