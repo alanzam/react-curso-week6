@@ -12,9 +12,16 @@ app.use(require('webpack-dev-middleware')(compiler, {
 }));
 
 app.use(require('webpack-hot-middleware')(compiler));
-app.get('*', function(req, res) {
+app.use('/css', express.static(path.join(__dirname, '../public/css')));
+app.use('/fonts', express.static(path.join(__dirname, '../public/fonts')));
+app.use('/img', express.static(path.join(__dirname, '../public/img')));
+app.use('/font-awesome', express.static(path.join(__dirname, '../public/font-awesome')));
+app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname, '../public/index.html'));
 });
+
+
+
 
 app.listen('8080', function(err){
   if(err) {
