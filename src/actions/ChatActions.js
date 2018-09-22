@@ -1,34 +1,20 @@
-export function selectChat(username) {
-    return {
-        type: 'SELECT_CHAT',
-        payload: username
-    };
-}
+export const CHAT_CONSTANTS = {
+  ADD_USER : 'ADD_USER',
+  ADD_CHAT : 'ADD_CHAT',
+  SELECT_USER : 'SELECT_USER'
+};
 
-export function addChat(message, currentChat) {
-    return {
-        type: 'ADD_CHAT',
-        payload:  {
-          ...message,
-          currentChat
-        }
-    };
-}
-
-export function addUser(username) {
-    return {
-        type: 'ADD_USER',
-        payload: username
-    };
-}
-
-export function generateChat() => (dispatch, getState) => {
-    var state = getState();
-    dispatch({
-      type: 'ADD_CHAT',
-      payload:  {
-        ...message,
-        currentChat
-      }
-    })
+export const ChatActions = {
+  selectChat: (username) => ({
+      type: CHAT_CONSTANTS.SELECT_USER,
+      payload: username
+  }),
+  addChat: (message) => ({
+      type: CHAT_CONSTANTS.ADD_CHAT,
+      payload: message
+  }),
+  addUser: (username) => ({
+      type: CHAT_CONSTANTS.ADD_USER,
+      payload: username
+  })
 }

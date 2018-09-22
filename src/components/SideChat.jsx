@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
 class SideChat extends React.Component {
+
 	render() {
-		console.log('rendering sidchat');
 		return (
       <div className="col s12 m4 l3">
         <div className="card orange darken-4">

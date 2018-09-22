@@ -1,22 +1,21 @@
 import React from 'react';
-import {connect} from 'react-redux';
-import * as Actions from '../actions/ChatActions';
 import ChatTableComponent from '../components/ChatTable';
+import { ChatActions } from '../actions/ChatActions';
+import { connect } from 'react-redux';
 
 const mapStateToProps = state => {
-	console.log(state);
-	return {
-	messageList: state.messageList.getIn([state.activeChat]),
-	userName: state.activeChat
-};
+  return {
+    messageList: state.messageList[state.activeChat],
+		userName: state.activeChat
+  }
 }
 
+const mapDispatchToProps = dispatch => {
+  return {
+    sendChat: message => {
+      dispatch(ChatActions.addChat(message))
+    }
+  }
+}
 
-const mapDispatchToProps = dispatch => ({
-	sendChat: msg => dispatch(Actions.addChat(msg))
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ChatTableComponent)
+export default connect(mapStateToProps, mapDispatchToProps)(ChatTableComponent);

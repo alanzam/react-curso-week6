@@ -1,15 +1,22 @@
 import React from 'react';
+import { generateNewUser, generateNewChat } from '../utils/chatHelper';
+import { ChatActions } from '../actions/ChatActions';
 import { connect } from 'react-redux';
-import { generateChat, addExternalUser } from '../actions/ChatActions';
 import NavBarComponent from '../components/NavBar';
-const mapStateToProps = state => ({
-	messageList: state.messageList,
-	userName: state.activeChat
-});
 
-const mapDispatchToProps = dispatch => ({
-	createResponse: () => dispatch(generateChat()),
-  addUser: () => dispatch(addExternalUser())
-});
+const mapDispatchToProps = dispatch => {
+  return {
+    createResponse: () => {
+      generateNewChat().then((m) => {
+        dispatch(ChatActions.addChat(m));
+      });
+    },
+    addUser: () => {
+      generateNewUser().then((u) => {
+        dispatch(ChatActions.addUser(u));
+      });
+    }
+  }
+}
 
-export default connect(mapStateToProps,mapDispatchToProps)(NavBarComponent)
+export default connect(null, mapDispatchToProps)(NavBarComponent);
