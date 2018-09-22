@@ -3,13 +3,14 @@ import PropTypes from 'prop-types';
 
 class BreadCrumbs extends React.Component {
   render() {
+    const breadcrumbs = this.props.currentRoute.split('/');
     return (
       <div className="row wrapper border-bottom white-bg page-heading">
           <div className="col-lg-10">
-              <h2>{this.props.pageName}</h2>
+              <h2>{breadcrumbs[breadcrumbs.length -1]}</h2>
               <ol className="breadcrumb">
                   {
-                    this.props.currentRoute.split('/').map((route, index) => (
+                    breadcrumbs.map((route, index) => (
                       <li key={index} ><a>{route}</a></li>
                     ))
                   }
@@ -21,8 +22,7 @@ class BreadCrumbs extends React.Component {
 }
 
 BreadCrumbs.propTypes = {
-  currentRoute: PropTypes.string.isRequired,
-  pageName: PropTypes.string.isRequired
+  currentRoute: PropTypes.string.isRequired
 };
 
 export default BreadCrumbs;

@@ -7,22 +7,13 @@ class NavBar extends React.Component {
       <nav className="navbar-default navbar-static-side" role="navigation">
           <div className="sidebar-collapse">
               <ul className="nav metismenu" id="side-menu">
-        				<li className="active"><a>Products grid</a></li>
-        				<li><a>Products list</a></li>
-        				<li><a>Product edit</a></li>
-        				<li><a>Product detail</a></li>
-        				<li><a>Cart</a></li>
-        				<li><a>Orders</a></li>
-        				<li><a>Credit Card form</a></li>
+        				<li><a onClick={() => this.props.linkTo('/Grid')}>Products grid</a></li>
+        				<li><a onClick={() => this.props.linkTo('/Edit')}>Products edit</a></li>
               </ul>
           </div>
       </nav>
     );
   }
-}
-
-NavBar.propType = {
-  currentRoute: PropTypes.string.isRequired
 }
 
 export default NavBar;

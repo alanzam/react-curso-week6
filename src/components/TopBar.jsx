@@ -15,7 +15,7 @@ class TopBar extends React.Component {
                   </li>
                   <li>
                       <a className="dropdown-toggle count-info">
-                          <i className="fa fa-envelope"></i>
+                          <i className="fa fa-shopping-cart"></i>
                           { this.props.cartItems > 0 ? <span className="label label-warning">{this.props.cartItems}</span> : null }
                       </a>
                   </li>
